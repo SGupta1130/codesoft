@@ -1,0 +1,65 @@
+import java.util.Scanner;
+
+// Class representing a user's bank account
+class BankAccount {
+    private double balance;
+
+    // Constructor to initialize the balance
+    public BankAccount(double initialBalance) {
+        if (initialBalance >= 0) {
+            balance = initialBalance;
+        } else {
+            balance = 0;
+        }
+    }
+
+    // Method to deposit money into the account
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            System.out.println("Successfully deposited $" + amount);
+        } else {
+            System.out.println("Invalid deposit amount. Must be greater than 0.");
+        }
+    }
+
+    // Method to withdraw money from the account
+    public boolean withdraw(double amount) {
+        if (amount <= 0) {
+            System.out.println("Invalid withdrawal amount. Must be greater than 0.");
+            return false;
+        } else if (amount > balance) {
+            System.out.println("Insufficient balance. Unable to withdraw $" + amount);
+            return false;
+        } else {
+            balance -= amount;
+            System.out.println("Successfully withdrew $" + amount);
+            return true;
+        }
+    }
+
+    // Method to check the account balance
+    public double getBalance() {
+        return balance;
+    }
+}
+
+// ATM class that interacts with the user
+class ATM {
+    private BankAccount account;
+
+    // Constructor that links the ATM with the user's bank account
+    public ATM(BankAccount account) {
+        this.account = account;
+    }
+
+    // Method to show the ATM menu and handle user choices
+    public void displayMenu() {
+        Scanner scanner = new Scanner(System.in);
+        int choice;
+
+        do {
+            System.out.println("\nATM Menu:");
+            System.out.println("1. Check Balance");
+            System.out.println("2. Deposit Money");
+            System.out.println("3. With
